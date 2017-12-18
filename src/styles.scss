@@ -12,6 +12,11 @@ html,body,app-root,md-sidenav-container,.site{
 main{
     flex: 1;
 }
+
+.full-width{
+    width:100%;
+}
+
 .fill-remaining-space{
     flex: 1 1 auto;
 }
