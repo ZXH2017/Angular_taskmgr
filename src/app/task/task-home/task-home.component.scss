@@ -1,0 +1,21 @@
+.fab-button{
+    position: fixed;
+    right: 32px;
+    bottom: 96px;
+    z-index: 998;
+}
+
+.task-lists{
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+.list-container{
+    flex: 0 0 360px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
