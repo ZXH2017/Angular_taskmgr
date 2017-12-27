@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task-item',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskItemComponent implements OnInit {
 
+  @Input() item;
+  @Input() avatar;
   constructor() { }
 
   ngOnInit() {
+    this.avatar = this.item.owner ? this.item.owner.avatar : 'unassigned';
   }
 
 }
