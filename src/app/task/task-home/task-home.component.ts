@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import { NewTaskComponent } from '../new-task/new-task.component';
 
 @Component({
   selector: 'app-task-home',
@@ -69,9 +71,11 @@ export class TaskHomeComponent implements OnInit {
       ]
     },
   ]
-  constructor() { }
+  constructor(private dialog: MdDialog) { }
 
   ngOnInit() {
   }
-
+  launchNewTaskDialog() {
+    this.dialog.open(NewTaskComponent);
+  }
 }
