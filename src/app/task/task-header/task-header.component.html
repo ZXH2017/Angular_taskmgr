@@ -16,7 +16,7 @@
 </div>
 
 <md-menu #menu="mdMenu">
-  <button md-menu-item>
+  <button md-menu-item (click)="onEditLiskClick()">
     <md-icon>mode_edit</md-icon>
     <span>修改列表名称</span>
   </button>
@@ -24,7 +24,7 @@
     <md-icon [svgIcon]="'move'" class="material-icon"></md-icon>
     <span>移动本列表所有内容</span>
   </button>
-  <button md-menu-item>
+  <button md-menu-item (click)="onDelListClick()">
     <md-icon>delete_forever</md-icon>
     <span>删除列表</span>
   </button>
