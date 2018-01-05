@@ -1,4 +1,8 @@
-<md-list-item class="container" [ngClass]="{'priority-normal':item.priority===3 , 'priority-important':item.priority===2
+<md-list-item class="container"
+ [@item]="widerPriority"
+  [ngClass]="{
+   'priority-normal':item.priority===3 ,
+  'priority-important':item.priority===2
 , 'priority-emergency':item.priority===1}" (click)="onItemClick()">
   <md-checkbox class="completion-status" [checked]="item.completed" (click)="onCheckBoxClick($event)"></md-checkbox>
   <div md-line class="content" [ngClass]="{'completed':item.completed}">
