@@ -1,24 +1,24 @@
 <md-nav-list>
-  <h3 md-subheader>项目</h3>
-  <md-list-item [routerLink]="['/project']">
-    <md-icon md-list-icon svgIcon="projects"></md-icon>
-    <span md-line>项目首页</span>
-    <span md-line md-subheader>查看您的所有项目</span>
-  </md-list-item>
-  <h3 md-subheader>日历</h3>
-  <md-list-item [routerLink]="['/tasklists']">
-      <md-icon md-list-icon svgIcon="month"></md-icon>
-      <span md-line>月视图</span>
-      <span md-line md-subheader>按月查看您的项目</span>
-  </md-list-item>
-  <md-list-item>
-      <md-icon md-list-icon svgIcon="week"></md-icon>
-      <span md-line>周视图</span>
-      <span md-line md-subheader>按周查看您的项目</span>
-  </md-list-item>
-  <md-list-item>
-      <md-icon md-list-icon [svgIcon]="today"></md-icon>
-      <span md-line>日视图</span>
-      <span md-line md-subheader>按天查看您的项目</span>
-  </md-list-item>
+    <h3 md-subheader>项目</h3>
+    <md-list-item [routerLink]="['/project']" (click)="onNavClick()">
+        <md-icon md-list-icon svgIcon="projects"></md-icon>
+        <span md-line>项目首页</span>
+        <span md-line md-subheader>查看您的所有项目</span>
+    </md-list-item>
+    <h3 md-subheader>日历</h3>
+    <md-list-item [routerLink]="['/tasklists']" (click)="onNavClick()">
+        <md-icon md-list-icon svgIcon="month"></md-icon>
+        <span md-line>月视图</span>
+        <span md-line md-subheader>按月查看您的项目</span>
+    </md-list-item>
+    <md-list-item>
+        <md-icon md-list-icon svgIcon="week"></md-icon>
+        <span md-line>周视图</span>
+        <span md-line md-subheader>按周查看您的项目</span>
+    </md-list-item>
+    <md-list-item>
+        <md-icon md-list-icon [svgIcon]="today"></md-icon>
+        <span md-line>日视图</span>
+        <span md-line md-subheader>按天查看您的项目</span>
+    </md-list-item>
 </md-nav-list>
