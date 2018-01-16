@@ -56,6 +56,11 @@ md-icon.avatar{
     box-shadow: 0 1px 2ox rgba(0, 0, 0, 0.1);
 }
 
+.drag-start{
+    opacity: 0.5;
+    border: #ff525b dashed 2px;
+}
+
 :host{
     width:1000%;
 }
