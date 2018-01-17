@@ -4,6 +4,7 @@ import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
+import { ServicesModule } from '../services/services.module';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -18,7 +19,8 @@ import 'rxjs/add/operator/take';
     HttpModule,
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ServicesModule.forRoot()
   ],
   declarations: [
     HeaderComponent,

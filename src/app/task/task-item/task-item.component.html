@@ -11,7 +11,7 @@
   [dragData]="item"
   >
   <md-checkbox class="completion-status" [checked]="item.completed" (click)="onCheckBoxClick($event)"></md-checkbox>
-  <div md-line class="content" [ngClass]="{'completed':item.completed}">
+  <div md-line class="content" [class.completed]="item.completed">
     <span [md-tooltip]="item.desc">{{item.desc}}</span>
   </div>
   <div md-line class="bottom-bar" *ngIf="item.dueDate">
