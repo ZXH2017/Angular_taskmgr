@@ -1,0 +1,19 @@
+<!-- <form #f="ngForm" (ngSubmit)="onSubmit(f,$event)">
+  <md-input-container class="full-width">
+    <input mdInput type="text" placeholder="在这里快速建立一个任务" [(ngModel)]="desc" name="desc" required>
+    <button mdSuffix md-icon-button type="submit"><md-icon>send</md-icon></button>
+    <md-error>不能为空哦</md-error>
+  </md-input-container>
+</form>
+
+<div>
+  表单数据：{{f.value|json}}
+</div>
+<div>
+  表单验证状态：{{f.valid|json}}
+</div> -->
+
+<md-input-container class="full-width">
+  <input mdInput type="text" placeholder="在这里快速建立一个任务" [(ngModel)]="desc">
+  <button mdSuffix md-icon-button type="button" (click)="sendQuickTask()"><md-icon>send</md-icon></button>
+</md-input-container>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MdToolbarModule,
   MdIconModule,
@@ -26,6 +27,8 @@ import { DirectiveModule } from '../directive/directive.module';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
@@ -48,6 +51,8 @@ import { DirectiveModule } from '../directive/directive.module';
   ],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
