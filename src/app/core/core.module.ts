@@ -31,7 +31,15 @@ import 'rxjs/add/operator/take';
     FooterComponent,
     SidebarComponent,
     AppRoutingModule
-  ]
+  ],
+  providers: [
+    {
+      provide: 'BASE_CONFIG',
+      useValue: {
+        uri: 'http://localhost:3000'
+      }
+    }
+  ],
 })
 export class CoreModule {
   //@SkipSelf() 去系统找依赖，避免无限循环
