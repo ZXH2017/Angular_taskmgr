@@ -1,11 +1,11 @@
-import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-invite',
   templateUrl: './invite.component.html',
   styleUrls: ['./invite.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
-  
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class InviteComponent implements OnInit {
 
@@ -22,5 +22,7 @@ export class InviteComponent implements OnInit {
   displayUser(user: { id: string; name: string }) {
     return user ? user.name : '';
   }
+  onClick() {
 
+  }
 }
