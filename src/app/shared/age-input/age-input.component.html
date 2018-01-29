@@ -1,0 +1,27 @@
+<div [formGroup]="form" class="age-input">
+  <div>
+    <md-input-container>
+      <input type="text" mdInput [mdDatePicker]="birthPicker" formControlName="birthday" placeholder="出生日期">
+      <button mdSuffix [mdDatepickerToggle]="birthPicker" type="button"></button>
+      <md-error>日期不正确</md-error>
+    </md-input-container>
+    <md-datepicker touchUi="true" #birthPicker></md-datepicker>
+  </div>
+  <!-- ng-container的好处是加了等于没加,渲染时没有这一层 -->
+  <ng-container formGroupName="age">
+    <div class="age-num">
+      <md-input-container>
+        <input type="number" placeholder="年龄" mdInput formControlName="ageNum">
+      </md-input-container>
+    </div>
+    <div>
+      <md-button-toggle-group formControlName="ageUnit">
+        <md-button-toggle *ngFor="let unit of ageUnits" [value]="unit.value">
+          {{unit.label}}
+        </md-button-toggle>
+      </md-button-toggle-group>
+    </div>
+    <md-error *ngIf="form.get('age').hasError('ageInvalid')">年龄或单位不正确</md-error>
+  </ng-container>
+
+</div>
