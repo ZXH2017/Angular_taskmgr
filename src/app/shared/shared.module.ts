@@ -50,10 +50,14 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule,
+    AgeInputComponent,
+    ImageListSelectComponent,
+    
   ],
   exports: [
     CommonModule,
     FormsModule,
+    AgeInputComponent,
     ReactiveFormsModule,
     MdToolbarModule,
     MdIconModule,

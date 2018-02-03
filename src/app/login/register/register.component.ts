@@ -24,13 +24,13 @@ export class RegisterComponent implements OnInit {
       password: [],
       repeat: [],
       avatar: [img],
-      dataOfBirth:[],
+      dataOfBirth: ['1990-01-01'],
     })
   }
 
   onSubmit({ value, valid }, ev: Event) {
     ev.preventDefault();
-    if(!valid){
+    if (!valid) {
       return;
     }
     console.log(value);

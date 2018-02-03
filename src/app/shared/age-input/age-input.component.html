@@ -15,7 +15,7 @@
       </md-input-container>
     </div>
     <div>
-      <md-button-toggle-group formControlName="ageUnit">
+      <md-button-toggle-group formControlName="ageUnit" [(ngModel)]="selectedUnit">
         <md-button-toggle *ngFor="let unit of ageUnits" [value]="unit.value">
           {{unit.label}}
         </md-button-toggle>

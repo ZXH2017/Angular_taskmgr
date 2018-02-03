@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 // import { Observable } from 'rxjs/Rx';
@@ -13,8 +13,14 @@ import {
   differenceInMonths,
   differenceInYears,
   isBefore,
-  parse
+  parse,
+  format,
+  isValid,
+  isDate,
+  isFuture,
 } from 'date-fns';
+import { isValidDate } from '../../utils/date.util';
+import { Subscription } from 'rxjs/Subscription';
 
 export enum AgeUnit {
   Year = 0,
@@ -44,9 +50,24 @@ export interface Age {
     }
   ]
 })
-export class AgeInputComponent implements ControlValueAccessor {
+export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
+  @Input() daysTop = 90;
+  @Input() daysBottom = 0;
+  @Input() monthsTop = 24;
+  @Input() monthsBottom = 1;
+  @Input() yearsTop = 150;
+  @Input() yearsBottom = 1;
+  @Input() format = 'YYYY-MM-DD';
+  @Input() debounceTime = 300;
+  selectedUnit = AgeUnit.Year;
+  ageUnits = [
+    { value: AgeUnit.Year, label: '岁' },
+    { value: AgeUnit.Month, label: '月' },
+    { value: AgeUnit.Day, label: '天' },
+  ];
   form: FormGroup;
+  sub: Subscription
   private propagateChange = (_: any) => { };
   constructor(private fb: FormBuilder) { }
 
@@ -55,7 +76,7 @@ export class AgeInputComponent implements ControlValueAccessor {
       birthday: ['', this.validateDate],
       age: this.fb.group({
         ageNum: [],
-        ageUnit: []
+        ageUnit: [AgeUnit.Year]
       }, { validator: this.validateAge('ageNum', 'ageUnit') })
     });
     const birthday = this.form.get('birthday');
@@ -66,17 +87,17 @@ export class AgeInputComponent implements ControlValueAccessor {
       .map(d => {
         return { date: d, form: 'birthday' };
       })
-      .debounceTime(300)
+      .debounceTime(this.debounceTime)
       .distinctUntilChanged()
       .filter(_ => birthday.valid);//判断birthday的正确性
 
     const ageNum$ = ageNum.valueChanges
       .startWith(ageNum.value)
-      .debounceTime(300)
+      .debounceTime(this.debounceTime)
       .distinctUntilChanged();//控件本身的值，startWidth是初始化
     const ageUnit$ = ageUnit.valueChanges
       .startWith(ageUnit.value)
-      .debounceTime(300)
+      .debounceTime(this.debounceTime)
       .distinctUntilChanged();
     const age$ = Observable
       .combineLatest(ageNum$, ageUnit$, (_n, _u) => {
@@ -91,13 +112,14 @@ export class AgeInputComponent implements ControlValueAccessor {
     const merged$ = Observable
       .merge(birthday$, age$)
       .filter(_ => this.form.valid);//过滤掉表单不合法的值
-    merged$.subscribe(d => {
+    this.sub = merged$.subscribe(d => {
       const age = this.toAge(d.date);
       if (d.form === 'birthday') {//日期转岁数
         if (age.age != ageNum.value) {
           ageNum.patchValue(age.age, { emitEvent: false });
         }
         if (age.unit != ageUnit.value) {
+          this.selectedUnit = age.unit;
           ageUnit.patchValue(age.unit, { emitEvent: false });
         }
         this.propagateChange(d.date);
@@ -113,19 +135,66 @@ export class AgeInputComponent implements ControlValueAccessor {
 
   }
 
-  validate(c: FormControl): { [key: string]: any } {//做自定义表单控件整个的验证
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 
+  validate(c: FormControl): { [key: string]: any } {//做自定义表单控件整个的验证
+    const val = c.value;
+    if (!val) {
+      return null;
+    }
+    if (isValidDate(val)) {
+      return null;
+    }
+    return {
+      dateOfBirthInvalid: true
+    }
   }
 
   validateDate(c: FormControl): { [key: string]: any } {
-
+    const val = c.value;
+    return isValidDate(val) ? null : {
+      birthdayInvalid: true
+    }
   }
 
-  validateAge(ageNumKey: string, ageUnitKey: string): { [key: string]: any } {
-    
+  validateAge(ageNumKey: string, ageUnitKey: string) {
+    return (group: FormGroup): { [key: string]: any } => {
+      const ageNum = group.controls[ageNumKey];
+      const ageUnit = group.controls[ageUnitKey];
+      let result = false;
+      const ageNumVal = ageNum.valid;
+      switch (ageUnit.value) {
+        case AgeUnit.Year: {
+          console.log(ageNumVal)
+          console.log(this.yearsBottom)
+          // result = ageNumVal > this.yearsBottom && ageNumVal < this.yearsTop;
+          break;
+        }
+        case AgeUnit.Month: {
+          // result = ageNumVal >= this.monthsBottom && ageNumVal < this.monthsTop;
+          break;
+        }
+        case AgeUnit.Day: {
+          // result = ageNumVal >= this.daysBottom && ageNumVal < this.daysTop;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      return result ? null : { ageInvalid: true };
+    }
   }
-  
-  writeValue(obj: any): void { };
+
+  writeValue(obj: any): void {
+    if (obj) {
+      this.form.get('birthday').patchValue(format(obj, this.format));
+    }
+  };
 
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
@@ -136,9 +205,9 @@ export class AgeInputComponent implements ControlValueAccessor {
   toAge(dateStr: string): Age {
     const date = parse(dateStr);
     const now = Date.now();
-    return isBefore(subDays(now, 90), date) ? //  如果now-90在date之前，就是90天之内
+    return isBefore(subDays(now, this.daysTop), date) ? //  如果now-90在date之前，就是90天之内
       { age: differenceInDays(now, date), unit: AgeUnit.Day } :
-      isBefore(subMonths(now, 24), date) ?
+      isBefore(subMonths(now, this.monthsTop), date) ?
         { age: differenceInMonths(now, date), unit: AgeUnit.Month } :
         {
           age: differenceInYears(now, date),
@@ -148,16 +217,16 @@ export class AgeInputComponent implements ControlValueAccessor {
 
   toDate(age: Age): string {
     const now = Date.now();
-    const dateFormat = 'YYYY-MM-DD';
+    // const dateFormat = 'YYYY-MM-DD';
     switch (age.unit) {
       case AgeUnit.Year: {
-        return format(subYears(now, age.age), dateFormat);//format格式化成要的格式
+        return format(subYears(now, age.age), this.format);//format格式化成要的格式
       }
       case AgeUnit.Month: {
-        return format(subMonths(now, age.age), dateFormat);
+        return format(subMonths(now, age.age), this.format);
       }
       case AgeUnit.Day: {
-        return format(subDays(now, age.age), dateFormat);
+        return format(subDays(now, age.age), this.format);
       }
       default: {
         return null;
