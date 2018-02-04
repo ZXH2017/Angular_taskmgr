@@ -5,6 +5,7 @@ import {
   MdToolbarModule,
   MdIconModule,
   MdButtonModule,
+  MdButtonToggleModule,  
   MdCardModule,
   MdInputModule,
   MdListModule,
@@ -34,6 +35,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
+    MdButtonToggleModule,    
     MdCardModule,
     MdInputModule,
     MdListModule,
@@ -50,18 +52,16 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule,
-    AgeInputComponent,
-    ImageListSelectComponent,
-    
+
   ],
   exports: [
     CommonModule,
     FormsModule,
-    AgeInputComponent,
     ReactiveFormsModule,
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
+    MdButtonToggleModule,    
     MdCardModule,
     MdInputModule,
     MdListModule,
@@ -78,13 +78,16 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule,
+    AgeInputComponent,
     ImageListSelectComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
   ],
   declarations: [
-    ConfirmDialogComponent, 
-    ImageListSelectComponent, AgeInputComponent]
+    ConfirmDialogComponent,
+    ImageListSelectComponent,
+    AgeInputComponent,
+  ]
 })
 export class SharedModule { }

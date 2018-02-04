@@ -21,14 +21,14 @@
           <md-icon class="avatar" [svgIcon]="item"></md-icon>
         </md-grid-tile>
       </md-grid-list> -->
-      <app-image-list-select 
+      <app-image-list-select
       [useSvgIcon]="true"
-       [cols]="6" 
-       [title]="'选择头像:'" 
-       [items]="items"
-        formControlName="avatar">
-      </app-image-list-select>
-      <app-age-input formControlName="dataOfBirth"></app-age-input>
+      [cols]="6"
+      [title]="'选择头像：'"
+      [items]="avatars$"
+      formControlName="avatar">
+    </app-image-list-select>
+    <app-age-input formControlName="dateOfBirth"></app-age-input>
       <button md-raised-button color="primary" type="submit">注册</button>
     </md-card-content>
     <md-card-actions class="text-right">

@@ -48,7 +48,8 @@ import 'rxjs/add/operator/do';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent],
+    SidebarComponent
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,

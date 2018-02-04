@@ -81,7 +81,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
     });
     const birthday = this.form.get('birthday');
     const ageNum = this.form.get('age').get('ageNum');
-    const ageUnit = this.form.get('age').get('ageNUnit');
+    const ageUnit = this.form.get('age').get('ageUnit');
 
     const birthday$ = birthday.valueChanges
       .map(d => {
@@ -94,7 +94,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
     const ageNum$ = ageNum.valueChanges
       .startWith(ageNum.value)
       .debounceTime(this.debounceTime)
-      .distinctUntilChanged();//控件本身的值，startWidth是初始化
+      .distinctUntilChanged();
     const ageUnit$ = ageUnit.valueChanges
       .startWith(ageUnit.value)
       .debounceTime(this.debounceTime)
@@ -166,20 +166,18 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
       const ageNum = group.controls[ageNumKey];
       const ageUnit = group.controls[ageUnitKey];
       let result = false;
-      const ageNumVal = ageNum.valid;
+      const ageNumVal = ageNum.value;
       switch (ageUnit.value) {
         case AgeUnit.Year: {
-          console.log(ageNumVal)
-          console.log(this.yearsBottom)
-          // result = ageNumVal > this.yearsBottom && ageNumVal < this.yearsTop;
+          result = ageNumVal > this.yearsBottom && ageNumVal < this.yearsTop;
           break;
         }
         case AgeUnit.Month: {
-          // result = ageNumVal >= this.monthsBottom && ageNumVal < this.monthsTop;
+          result = ageNumVal >= this.monthsBottom && ageNumVal < this.monthsTop;
           break;
         }
         case AgeUnit.Day: {
-          // result = ageNumVal >= this.daysBottom && ageNumVal < this.daysTop;
+          result = ageNumVal >= this.daysBottom && ageNumVal < this.daysTop;
           break;
         }
         default: {
