@@ -1,4 +1,25 @@
 {
+    "projects": [
+        {
+            "id": "1",
+            "name": "企业协作平台",
+            "desc": "这是一个企业内部项目",
+            "coverImg": "assets/img/covers/0.jpg",
+            "members": [
+                "1",
+                "2"
+            ]
+        },
+        {
+            "id": "2",
+            "name": "自动化测试项目",
+            "desc": "这是一个企业内部项目",
+            "coverImg": "assets/img/covers/1.jpg",
+            "members": [
+                "1"
+            ]
+        }
+    ],
     "quotes": [
         {
             "id": "0",
