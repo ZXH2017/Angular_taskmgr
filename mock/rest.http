@@ -1,1 +1,41 @@
 GET http://localhost:3000/projects?members_like=1
+
+###
+GET http://localhost:3000/projects
+###
+
+GET http://localhost:3000/taskLists
+
+# json-server ./mock/data.json --watch 启动
+
+###
+POST http://localhost:3000/taskLists
+Content-Type: application/json
+
+{
+    "name":"list1",
+    "order":1,
+    "projectId":"1"
+}
+
+###
+PUT http://localhost:3000/taskLists/JXAi1Pd
+Content-Type: application/json
+
+{
+    "name":"list2",
+    "order":2,
+    "projectId":"1"
+}
+
+
+###
+PATCH http://localhost:3000/taskLists/JXAi1Pd
+Content-Type: application/json
+
+{
+    "name":"list3"
+}
+
+###
+DELETE  http://localhost:3000/taskLists/wgRYWrA
