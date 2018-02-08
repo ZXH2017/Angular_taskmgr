@@ -41,7 +41,7 @@ export class ProjectService {
 
     //DELETE
     del(project: Project): Observable<Project> {
-        const delTask$ = Observable.from(project.taskLists)
+        const delTask$ = Observable.from(project.taskLists ? project.taskLists : [])
             .mergeMap(listId => this.http.delete(`${this.config.uri}/taskLists/${listId}`))//mergeMap:delete的时候有新的进来，旧的还是要删除的。
             .count();//数量统计 
         return delTask$

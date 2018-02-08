@@ -1,15 +1,17 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
   <h3 md-dialog-title>{{title}}</h3>
   <div md-dialog-content>
     <md-input-container class="full-width">
-      <input mdInput type="text" placeholder="项目名称">
+      <input mdInput type="text" placeholder="项目名称" formControlName="name">
     </md-input-container>
     <md-input-container class="full-width">
-      <input mdInput type="text" placeholder="项目描述">
+      <input mdInput type="text" placeholder="项目描述" formControlName="desc">
     </md-input-container>
+    <app-image-list-select [useSvgIcon]="false" [cols]="6" [title]="'选择封面：'" [items]="coverImages" formControlName="coverImg">
+    </app-image-list-select>
   </div>
   <div md-dialog-action>
-    <button type="button" md-raised-button color="primary" (click)="onClick()">保存</button>
+    <button type="submit" md-raised-button color="primary" [disabled]="!form.valid">保存</button>
     <button type="button" md-dialog-close md-button>关闭</button>
   </div>
 </form>

@@ -19,6 +19,30 @@
       "members": [
         "1"
       ]
+    },
+    {
+      "name": "weqwe",
+      "desc": null,
+      "coverImg": "/assets/img/covers/2_tn.jpg",
+      "id": "SEk60uR"
+    },
+    {
+      "name": "sadas",
+      "desc": null,
+      "coverImg": "/assets/img/covers/8.jpg",
+      "id": "UXAC_KZ"
+    },
+    {
+      "name": "test",
+      "desc": null,
+      "coverImg": "/assets/img/covers/29.jpg",
+      "id": "Z2BU14I"
+    },
+    {
+      "name": "test",
+      "desc": null,
+      "coverImg": "/assets/img/covers/29.jpg",
+      "id": "TWKqRT0"
     }
   ],
   "quotes": [

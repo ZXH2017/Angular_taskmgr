@@ -1,5 +1,8 @@
-<div class="container" [@listAnim]="projects.length">
-  <app-project-item *ngFor="let project of projects" [item]="project" class="card" (onInvite)="launchInviteDialog()" (onEdit)="launchUpdateDialog()"
+<div class="container" [@listAnim]="projects?.length">
+  <app-project-item *ngFor="let project of projects" 
+  [item]="project" class="card"
+   (onInvite)="launchInviteDialog()" 
+   (onEdit)="launchUpdateDialog(project)"
     (onDel)="launchConfirmDialog(project)">
   </app-project-item>
 </div>
