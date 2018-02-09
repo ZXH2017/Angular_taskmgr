@@ -1,4 +1,11 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { NewProjectComponent } from '../new-project/new-project.component';
 import { InviteComponent } from '../invite/invite.component';
@@ -8,7 +15,7 @@ import { listAnimation } from '../../anims/list.anim';
 import { ProjectService } from '../../services/project.service';
 import * as _ from 'lodash';
 import { Project } from '../../domain/project.model';
-
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-project-list',
@@ -18,21 +25,27 @@ import { Project } from '../../domain/project.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
 
   @HostBinding('@routeAnim') state;
 
   projects;
+  sub: Subscription;
   constructor(
     private dialog: MdDialog,
     private cd: ChangeDetectorRef,
     private service$: ProjectService) { }
 
   ngOnInit() {
-    this.service$.get("1").subscribe(projects => {
+    this.sub = this.service$.get("1").subscribe(projects => {
       this.projects = projects;
       this.cd.markForCheck();
     });
+  }
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   openNewProjectDialog() {

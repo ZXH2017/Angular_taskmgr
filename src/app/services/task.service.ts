@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Task } from '../domain';//可以简略是因为index.js
+import { Task, TaskList } from '../domain';//可以简略是因为index.js
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

@@ -35,7 +35,7 @@ export class ProjectService {
             coverImg: project.coverImg
         }
         return this.http
-            .post(uri, JSON.stringify(toUpdate), { headers: this.headers })
+            .patch(uri, JSON.stringify(toUpdate), { headers: this.headers })
             .map(res => res.json())
     }
 
