@@ -5,7 +5,7 @@ import {
   MdToolbarModule,
   MdIconModule,
   MdButtonModule,
-  MdButtonToggleModule,  
+  MdButtonToggleModule,
   MdCardModule,
   MdInputModule,
   MdListModule,
@@ -20,12 +20,14 @@ import {
   MdRadioModule,
   MdNativeDateModule,
   MdSelectModule,
-  MdSidenavModule
+  MdSidenavModule,
+  MdChipsModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { AgeInputComponent } from './age-input/age-input.component';
+import { ChipsListComponent } from './chips-list/chips-list.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
-    MdButtonToggleModule,    
+    MdButtonToggleModule,
     MdCardModule,
     MdInputModule,
     MdListModule,
@@ -52,6 +54,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule,
+    MdChipsModule
 
   ],
   exports: [
@@ -61,7 +64,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
-    MdButtonToggleModule,    
+    MdButtonToggleModule,
     MdCardModule,
     MdInputModule,
     MdListModule,
@@ -79,7 +82,10 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MdSidenavModule,
     DirectiveModule,
     AgeInputComponent,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    ChipsListComponent,
+    MdChipsModule
+
   ],
   entryComponents: [
     ConfirmDialogComponent
@@ -88,6 +94,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     ConfirmDialogComponent,
     ImageListSelectComponent,
     AgeInputComponent,
+    ChipsListComponent,
   ]
 })
 export class SharedModule { }

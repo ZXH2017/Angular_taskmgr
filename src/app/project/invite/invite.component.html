@@ -1,17 +1,18 @@
-<form>
+<form #f="ngForm" (ngSubmit)="onSubmit($event,f)">
   <h3 md-dialog-title>邀请组员：</h3>
   <div md-dialog-content>
-    <md-input-container class="full-width">
+    <!-- <md-input-container class="full-width">
       <input mdInput type="text" placeholder="组员姓名" [mdAutocomplete]="autoMembers">
-    </md-input-container>
+    </md-input-container> -->
+    <app-chips-list [label]="'邀请成员'" name="members" [(ngModel)]="members"></app-chips-list>
   </div>
   <div md-dialog-action>
-    <button type="button" md-raised-button color="primary" (click)="onClick()">保存</button>
+    <button type="submit" md-raised-button color="primary" [disabled]="!f.valid">保存</button>
     <button type="button" md-dialog-close md-button>关闭</button>
   </div>
 </form>
-<md-autocomplete #autoMembers="mdAutocomplete" [displayWith]="displayUser">
+<!-- <md-autocomplete #autoMembers="mdAutocomplete" [displayWith]="displayUser">
   <md-option *ngFor="let item of items" [value]="item">
     {{item.name}}
   </md-option>
-</md-autocomplete>
+</md-autocomplete> -->
